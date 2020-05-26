@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+h1 , h2 ,h3{text-align: center;
+         text-transform: capitalize;}
+p {text-align: center;}
+.title
+{text-align: center;
+     background-color: #ccffcc ;
+      margin-top: -15px;
+      margin-right: -10px;
+      margin-left: -10px;
+       font-family: "Comic Sans MS"}
+.ces
+{
+    margin-left: 30%;
+}
+ .des
+ {   height: 200px;
+     line-height: 1px;
+      width: 50%;
+
+     text-align: center;
+     border-style: groove;
+ }
+    .forrm
+    {
+        text-align: center;
+    }
+    .delete{
+        margin-left: 95%;
+        border-radius: 50%;
+        background-color:#b3ffb3;
+    }
+
+
+    .notificationdanger
+    {   margin-top: 0.5%;
+        width : 30%;
+        margin-left: 35%;
+        background-color: #ffb3b3;
+    }
+    .notificationsuccess
+    {
+        margin-top: 0.5%;
+        background-color: #80ff80;
+        width : 30%;
+        margin-left: 35%;
+
+    }
+</style>
+</head>
+<body>
+    <div class="title"><br/>
+            <br/><h1><b>What's the weather like?</b></h1>
+                <br/><br/>
+     </div>
+    <pre>
+    </pre>
+
+     <div class="forrm">
+              <form method="POST">
+                     {%  csrf_token %}
+                     {{ form.name }}
+                 <button type="submit">Add City</button>
+                  {% if message %}
+                      <div class="notification{{ message_class }}">{{ message }}</div>
+                  {% endif %}
+
+              </form>
+     </div>
+    <pre>
+
+    </pre>
+
+
+
+{% for city_weather in weather_data %}
+
+<div class="ces">
+<div class="des">
+    <div class =button>
+        <a href="{% url 'delete_city' city_weather.city %}">
+            <button class="delete">x</button>
+        </a>
+    </div>
+        <h1>
+             <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
+                     {{ city_weather.city }}
+        </h1>
+        <br/>
+        <h2>{{ city_weather.temperature }}° C</h2>
+        <h3>{{ city_weather.description }}</h3>
+
+</div>
+
+</div>
+    <pre>
+    </pre>
+        {%  endfor %}
+
+</body>
+</html>
